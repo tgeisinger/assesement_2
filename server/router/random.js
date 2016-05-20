@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/mu';
-var randomNum = 0
+
 
 
 router.post('/', function(req, res) {
@@ -14,7 +14,7 @@ router.post('/', function(req, res) {
         }
 
         client.query('INSERT INTO prime_zoo (animal_type,quantity) ' +
-            'VALUES ($1, $2)', [values.animalinput, randomNum],
+            'VALUES ($1, $2)', [values.animalinput, randomNumber(1, 100)],
             function(err, result) {
                 done();
 
@@ -35,7 +35,7 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (1 + max - min) + min);
 }
 
-randomNum = (randomNumber(1, 100));
+
 
 
 router.get('/', function (req, res) {
